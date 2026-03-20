@@ -62,6 +62,19 @@ Lambda drops 0.5 to 0.3 when a trusted node suddenly behaves badly, speeding up 
 
 Isolation requires votes from more than 1/3 of actual neighbours. False positive recovery uses a 3-round probation window. Malicious nodes are permanently blocked — their DT ceiling of ~0.14 is below the reinstatement floor of 0.30.
 
+## Results
+
+![Simulation Results](atemrm_results.png)
+
+Simulation output (20 nodes, 25 rounds, seed=42):
+
+- Nodes 1 and 2 isolated at round 9 — both confirmed malicious (7/7 and 8/8 neighbour votes)
+- Node 14 turned malicious at round 11, isolated in the same round (4/7 votes)
+- PDR held at 0.805 through rounds 1-10 despite 2 active malicious nodes
+- PDR settled at 0.716 after round 11 attacker isolated — routing avoids all 3 malicious nodes
+- Network energy drained only 9.4% over 25 rounds (100J to 90.6J), vs ~93% in naive all-pairs model
+- Adaptive security weight w_t started at 0.992 and decreased linearly as energy drained, showing the protocol correctly shifting priority from security toward energy conservation as the network aged
+
 ## Network Model
 
 - 20 nodes in a 500 x 500 m field
